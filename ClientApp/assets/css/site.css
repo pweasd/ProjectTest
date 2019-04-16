@@ -72,7 +72,7 @@ footer,
 header,
 hgroup,
 menu,
-nav,
+/* nav, */
 output,
 ruby,
 section,
@@ -106,7 +106,7 @@ footer,
 header,
 hgroup,
 menu,
-nav,
+/* nav, */
 section {
   display: block;
 }
