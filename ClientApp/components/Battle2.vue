@@ -3,18 +3,24 @@
     <v-touch @swipeleft="clickHandler('prev')" @swiperight="clickHandler('next')">
       <div class="container">
         <div class="carousel">
-          <div class="slide-left" v-for="(item, index) in items" :key="item.id" v-show="showIndex===index">{{ item.text }}</div>
+          <div class="slide-left" v-for="(item, index) in items" :key="item.id" v-show="showIndex===index">
+            <div class="image" style="background: red;"></div>
+            <div class="title">{{ item.text }}</div>
+          </div>
         </div>
 
         <div class="versus">VS</div>
 
         <div class="carousel">
-          <div class="slide-right" v-for="(item, index) in items" :key="item.id" v-show="showIndex===index">{{ item.text }}</div>
+          <div class="slide-right" v-for="(item, index) in items" :key="item.id" v-show="showIndex===index">
+            <div class="image" style="background: blue;"></div>
+            <div class="title">{{ item.text }}</div>
+          </div>
         </div>
       </div>
     </v-touch>
-    <button @click="clickHandler('prev')">Prev</button>
-    <button @click="clickHandler('next')">Next</button>
+    <!-- <button @click="clickHandler('prev')">Prev</button>
+    <button @click="clickHandler('next')">Next</button>-->
   </div>
 </template>
 
@@ -68,8 +74,14 @@
 </script>
 
 <style lang="scss" scoped>
-  $width: 150px;
-  $height: 100px;
+  $height: 136px;
+  @mixin slide-item() {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    box-sizing: border-box;
+  }
   .epi-container {
     width: 100%;
     height: 100%;
@@ -78,27 +90,35 @@
     .container {
       display: flex;
       width: 100%;
-      height: 100px;
+      height: $height;
+      position: relative;
     }
     .carousel {
       position: relative;
       flex: 1;
-      border: 1px solid #555555;
       overflow: hidden; // 옆으로 빠질 때 스크롤 방지
     }
     .versus {
       display: flex;
       align-items: center;
-      margin: 0 10px;
+      justify-content: center;
+      position: absolute;
+      top: 20%;
+      left: 43%;
+      z-index: 1;
+      font-size: 18px;
+      color: white;
+      width: 44px;
+      height: 44px;
+      background-color: #ffaa00;
+      border: 3px solid #ffffff;
+      box-sizing: border-box;
+      border-radius: 50%;
+      // margin: 0 10px;
     }
     .slide-left {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      background-color: #ed1c24;
+      @include slide-item();
+      // background-color: #ed1c24;
       animation: slide-left 0.8s cubic-bezier(0.1, 0.69, 0.36, 1.55) backwards;
     }
     @keyframes slide-left {
@@ -121,13 +141,8 @@
       }
     }
     .slide-right {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      background-color: #0072bc;
+      @include slide-item();
+      // background-color: #0072bc;
       animation: slide-right 0.8s cubic-bezier(0.1, 0.69, 0.36, 1.55) backwards;
     }
     @keyframes slide-right {
@@ -148,6 +163,15 @@
         // right: 0;
         transform: translateX(0);
       }
+    }
+    .image {
+      height: 100px;
+    }
+    .title {
+      height: calc(100% - 100px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 </style>
