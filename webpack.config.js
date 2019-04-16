@@ -49,6 +49,7 @@ module.exports = () => {
             use: 'vue-loader',
           },
           { test: /\.js$/, include: /ClientApp/, use: 'babel-loader' },
+          // Setting: css or scss 및 sass-loader 추가
           { test: /\.(css|scss)$/, use: isDevBuild ? ['style-loader', 'css-loader', 'sass-loader'] : [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'] },
           { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
         ],
