@@ -11,15 +11,18 @@ export const routes = [
     name: 'HomePage',
     path: '/',
     component: HomePage,
+    display: 'Home',
   },
   {
     name: 'NewVideo',
     path: '/newvideo',
     component: NewVideo,
+    display: 'New',
   },
   {
     name: 'MyPage',
     path: '/mypage',
     component: MyPage,
+    display: 'MyPage',
   },
 ]

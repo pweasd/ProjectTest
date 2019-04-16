@@ -41,6 +41,7 @@
       return {
         text: '',
         showIndex: 0,
+        interval: undefined,
       }
     },
     mounted() {
@@ -50,6 +51,10 @@
     },
     methods: {
       clickHandler(string) {
+        // 직접 조작할 경우 인터벌의 시간과 키프레임의 시간이 안맞으므로 인터벌의 시간을 초기화
+        clearInterval(this.interval)
+        this.autoPlayMethod()
+
         if (string === 'next') {
           if (this.showIndex < this.items.length - 1) {
             this.showIndex++
@@ -65,7 +70,7 @@
         }
       },
       autoPlayMethod() {
-        setInterval(() => {
+        this.interval = setInterval(() => {
           this.clickHandler('next')
         }, 3500)
       },
@@ -81,6 +86,13 @@
     height: 100%;
     padding: 2px;
     box-sizing: border-box;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 3s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
   .epi-container {
     width: 100%;
@@ -103,7 +115,7 @@
       align-items: center;
       justify-content: center;
       position: absolute;
-      top: 20%;
+      top: 22%;
       left: 43%;
       z-index: 1;
       font-size: 18px;
@@ -116,10 +128,22 @@
       border-radius: 50%;
       // margin: 0 10px;
     }
+    @keyframes fadeout {
+      0% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
     .slide-left {
       @include slide-item();
+
       // background-color: #ed1c24;
-      animation: slide-left 0.8s cubic-bezier(0.1, 0.69, 0.36, 1.55) backwards;
+      animation: slide-left 0.9s cubic-bezier(0.5, 0.69, 0.46, 1.55) backwards, fadeout 3.6s;
     }
     @keyframes slide-left {
       0% {
@@ -143,7 +167,7 @@
     .slide-right {
       @include slide-item();
       // background-color: #0072bc;
-      animation: slide-right 0.8s cubic-bezier(0.1, 0.69, 0.36, 1.55) backwards;
+      animation: slide-right 0.9s cubic-bezier(0.5, 0.69, 0.46, 1.55) backwards, fadeout 3.6s;
     }
     @keyframes slide-right {
       0% {

@@ -1,23 +1,19 @@
 <template>
   <div id="app" class="container-fluid">
-    <!-- <header params="route: route"></header> -->
-    <div>
-      <header></header>
-      <!-- <nav params="route: route"></nav> -->
-    </div>
+    <main-header params="route: route"></main-header>
 
-    <router-view></router-view>
+    <div>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-  import nav from '../components/nav-menu'
   import Header from '../components/Header.vue'
 
   export default {
     components: {
-      Header,
-      nav,
+      'main-header': Header,
     },
 
     data() {
