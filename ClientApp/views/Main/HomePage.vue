@@ -1,15 +1,14 @@
 <template>
   <div>
-    <battle></battle>
+    <battle2></battle2>
   </div>
 </template>
 
 <script>
-  import Battle from '../../components/Battle.vue'
+  import Battle2 from '../../components/Battle2.vue'
   export default {
     components: {
-      Battle,
-      Animation,
+      Battle2,
     },
   }
 </script>
