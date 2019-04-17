@@ -116,7 +116,7 @@
       justify-content: center;
       position: absolute;
       top: 22%;
-      left: 43%;
+      left: calc(50% - 22px);
       z-index: 1;
       font-size: 18px;
       color: white;

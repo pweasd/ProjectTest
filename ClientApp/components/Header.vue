@@ -1,8 +1,9 @@
 <template>
   <div class="header-container">
+    <div></div>
     <nav class="tab-navi">
       <router-link :to="route.path" exact-active-class="active" v-for="(route, index) in routes" :key="index" class="menu">
-        <img class="image" :src="route | iconFilter" :alt="route.display">
+        <img class="image" :src="$route | iconFilter(route)" :alt="route.display">
       </router-link>
     </nav>
   </div>
@@ -12,18 +13,9 @@
   import { routes } from '../router/routes.js'
   export default {
     filters: {
-      iconFilter(route) {
-        switch (route.name) {
-          case 'HomePage':
-            return '/dist/image/btn_home_off.png'
-          case 'NewVideo':
-            return '/dist/image/btn_home_off.png'
-          case 'MyPage':
-            return '/dist/image/btn_home_off.png'
-
-          default:
-            break
-        }
+      iconFilter(value1, value2) {
+        if (value1.path === value2.path) return value2.icon_on
+        else return value2.icon_off
       },
     },
     data() {
@@ -31,32 +23,40 @@
         routes,
       }
     },
+    methods: {},
   }
 </script>
 
 <style lang="scss" scoped>
   .header-container {
     width: 100%;
-    height: 100px;
     .tab-navi {
       display: flex;
       justify-content: center;
       font-size: 10px;
+      height: 42px;
     }
     .menu {
       width: 50px;
       display: flex;
       justify-content: center;
+      align-items: center;
       &:not(:last-child) {
         margin-right: 15px;
+      }
+      .image {
+        width: 24px;
+        height: 24px;
+      }
+      &:nth-of-type(2) {
+        .image {
+          width: 20px;
+          height: 16px;
+        }
       }
     }
     .active {
       border-bottom: 2px solid #ffaa00;
-    }
-    .image {
-      width: 24px;
-      height: 24px;
     }
   }
 </style>
