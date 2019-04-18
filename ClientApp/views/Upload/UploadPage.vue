@@ -11,13 +11,22 @@
     </div>
 
     <div class="VideoUpload__detail">
-      <p class="VideoUpload__title">강의 제목 <font class="VideoUpload__red">*필수입력</font></p>
+      <p class="VideoUpload__title">
+        강의 제목
+        <font class="VideoUpload__red">*필수입력</font>
+      </p>
       <input class="VideoUpload_input" type="text" placeholder="강의 제목을 입력해주세요.">
 
-      <p class="VideoUpload__title">강의 설명 <font class="VideoUpload__red">*필수입력</font></p>
+      <p class="VideoUpload__title">
+        강의 설명
+        <font class="VideoUpload__red">*필수입력</font>
+      </p>
       <textarea class="VideoUpload__textArea" placeholder="강의에 대한 설명을 입력해주세요."></textarea>
 
-      <p class="VideoUpload__title">지정 태그 <font class="VideoUpload__red">*필수입력</font></p>
+      <p class="VideoUpload__title">
+        지정 태그
+        <font class="VideoUpload__red">*필수입력</font>
+      </p>
       <div class="VideoUpload__tagArea">
         <el-popover placement="bottom" width="160" v-model="visibleList[0]">
           <div class="TagContainer" v-for="(tag,index) in tagGradeList" :key="tag.id">
@@ -59,22 +68,37 @@
 
       <button class="VideoUpload__uploadButton" @click="saveClicked">올리기</button>
     </div>
-    
   </div>
 </template>
 
 <script>
   export default {
+    created() {
+      this.$store.commit('headerTitle', '업로드 페이지')
+    },
     data() {
       return {
         file: undefined,
-        tagGradeList: ['초등 1학년','초등 2학년','초등 3학년','초등 4학년','초등 5학년','초등 6학년','중등 1학년','중등 2학년','중등 3학년','고등 1학년','고등 2학년','고등 3학년'],
-        tagSubjectList: ['국어','수학','영어','과학','사회','음악','미술','체육'],
-        tagDedanList: ['대단원1','대단원2','대단원3','대단원4'],
-        tagSodanList: ['소단원1','소단원2','소단원3','소단원4'],
+        tagGradeList: [
+          '초등 1학년',
+          '초등 2학년',
+          '초등 3학년',
+          '초등 4학년',
+          '초등 5학년',
+          '초등 6학년',
+          '중등 1학년',
+          '중등 2학년',
+          '중등 3학년',
+          '고등 1학년',
+          '고등 2학년',
+          '고등 3학년',
+        ],
+        tagSubjectList: ['국어', '수학', '영어', '과학', '사회', '음악', '미술', '체육'],
+        tagDedanList: ['대단원1', '대단원2', '대단원3', '대단원4'],
+        tagSodanList: ['소단원1', '소단원2', '소단원3', '소단원4'],
         visibleList: [false, false, false, false],
         selectedList: [false, false, false, false],
-        tagList: ['학년','과목','대단원','소단원']
+        tagList: ['학년', '과목', '대단원', '소단원'],
       }
     },
     methods: {
@@ -117,8 +141,8 @@
           this.selectedList.splice(index, 1, true)
         }
 
-        let button = document.getElementsByClassName("el-button")[index];
-        button.style.border = "1px solid #888888";
+        let button = document.getElementsByClassName('el-button')[index]
+        button.style.border = '1px solid #888888'
 
         this.visibleList.splice(index, 1, false)
         this.tagList.splice(index, 1, tag)
@@ -131,34 +155,34 @@
             check = true
           }
         })
-        
+
         if (check) {
-          console.log('선택안된거 있음');
+          console.log('선택안된거 있음')
           return
         }
 
-        console.log('선택안된거 없음');
-      }
+        console.log('선택안된거 없음')
+      },
     },
     watch: {
       selectedList: {
         handler: function(val, oldVal) {
-          console.log('현재값', val);
-          console.log('이전값', oldVal);
+          console.log('현재값', val)
+          console.log('이전값', oldVal)
         },
-        deep: true
-      }
-    }
+        deep: true,
+      },
+    },
   }
 </script>
 
 <style lang="scss">
-  .VideoUpload{
+  .VideoUpload {
     width: 100%;
-    .VideoUpload__video{
+    .VideoUpload__video {
       width: 100%;
       height: 178px;
-      border: 1px solid #DCDCDC;
+      border: 1px solid #dcdcdc;
       box-sizing: border-box;
       .file-tag {
         display: none;
@@ -173,52 +197,52 @@
         max-height: 176px;
       }
     }
-    .VideoUpload__detail{
+    .VideoUpload__detail {
       padding: 20px 14px;
       box-sizing: border-box;
-      .VideoUpload__title{
+      .VideoUpload__title {
         font-size: 11px;
         color: #222222;
       }
-      .VideoUpload__red{
+      .VideoUpload__red {
         font-size: 9px;
-        color: #EE0303;
+        color: #ee0303;
       }
-      .VideoUpload_input{
+      .VideoUpload_input {
         width: 100%;
         height: 36px;
         margin-top: 3px;
         margin-bottom: 20px;
         padding: 0px 10px;
-        border: 1px solid #DCDCDC;
+        border: 1px solid #dcdcdc;
         box-sizing: border-box;
         font-size: 10px;
         color: #222222;
       }
-      .VideoUpload__textArea{
+      .VideoUpload__textArea {
         width: 100%;
         height: 68px;
         margin-top: 3px;
         margin-bottom: 20px;
         padding: 10px;
-        border: 1px solid #DCDCDC;
+        border: 1px solid #dcdcdc;
         box-sizing: border-box;
         font-size: 10px;
         color: #222222;
         resize: none;
       }
-      .VideoUpload__tagArea{
+      .VideoUpload__tagArea {
         width: 100%;
         margin-top: 3px;
         margin-bottom: 20px;
       }
-      .VideoUpload__uploadButton{
+      .VideoUpload__uploadButton {
         width: 100%;
         height: 46px;
         margin-top: 10px;
         margin-bottom: 20px;
-        background: #FFFFFF;
-        border: 1px solid #DCDCDC;
+        background: #ffffff;
+        border: 1px solid #dcdcdc;
         border-radius: 3px;
         box-sizing: border-box;
         font-size: 14px;
@@ -246,7 +270,7 @@
       input::-ms-clear {
         display: none;
       }
-      
+
       /* textarea placeholder custom */
       /* Chrome, Firefox, Opera, Safari 10.1+*/
       textarea::-webkit-input-placeholder {
@@ -275,11 +299,12 @@
     line-height: 26px;
     padding: 0px 15px;
     font-size: 10px;
-    border-color: #DCDCDC;
+    border-color: #dcdcdc;
   }
-  .el-button:focus, .el-button:hover{
+  .el-button:focus,
+  .el-button:hover {
     color: #222222;
-    border-color: #FFE600;
-    background-color: #FFFFFF;
+    border-color: #ffe600;
+    background-color: #ffffff;
   }
 </style>
